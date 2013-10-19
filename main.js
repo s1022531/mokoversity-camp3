@@ -1,5 +1,8 @@
-(function(){
-var canvas = document.getElementById('game');+var ctx = canvas.getContext('2d');
+var gameModule=(function(){
+	var timeoutVar;
+	function start(){
+var canvas = document.getElementById('game');
+var ctx = canvas.getContext('2d');
   var ballX = Math.floor(Math.random() * 300); // 0..300
     var ballY = Math.floor(Math.random() * 500);
   var ballR = Math.floor(Math.random() * 100);
@@ -11,4 +14,12 @@ ctx.fillStyle = 'black';
 ctx.beginPath();
  ctx.arc(ballX, ballY, ballR, 0, Math.PI * 2 , true);
 ctx.fill();
+
+timeoutVar=settimeout(start,500);
+counter++;
+counsule.log("Counter:"+counter);
+}
+return{
+start:start}
 })();
+gameModule.start();
