@@ -1,9 +1,10 @@
 var gameModule=(function(){
 	var timeoutVar,
-	counter = 0,
-	ballX,
-    ballY,
-    ballR;
+		counter = 0,
+		ballX,
+    	ballY,
+    	ballR,
+    scores;
     var colors = ['#ff0000', '#0000ff', 'yellow'];
     var length = colors.length;
 
@@ -15,9 +16,12 @@ var gameModule=(function(){
      var tmp = (ballX - x) * (ballX - x) + (ballY - y) * (ballY - y);
 
     if (tmp < ballR*ballR)
+    	scores = scores + (100 - ballR);
       console.log("Hit ! Good.");
   }
 	function start(){
+
+	 scores = 0;	
 		document.getElementById("main").addEventListener("click", touchEvent, false);
     startGame();    
   }
@@ -35,13 +39,18 @@ ctx.fillStyle = colors[counter%length];
 ctx.beginPath();
  ctx.arc(ballX, ballY, ballR, 0, Math.PI * 2 , true);
 ctx.fill();
-if (counter >= 10){
-}else{
+if (counter >= 10){}
+
+else{
 timeoutVar=setTimeout(start,500);
 counter = counter+1;
 console.log("Counter:"+counter);
 }
 }
+
+  function gameOver() {
+     console.log("Final: " + scores);
+ }
 return{
 start:start}
 
