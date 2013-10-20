@@ -1,11 +1,21 @@
 var gameModule=(function(){
 	var timeoutVar,
-	counter = 0;
+	counter = 0,
+	ballX,
+    ballY,
+    ballR;
+    var colors = ['#ff0000', '#0000ff', 'yellow'];
+    var length = colors.length;
+
 	function touchEvent(evt) {
     var x = evt.clientX,
         y = evt.clientY;
 
     console.log("Clicked: " + x + " , " + y);
+     var tmp = (ballX - x) * (ballX - x) + (ballY - y) * (ballY - y);
+
+    if (tmp < ballR*ballR)
+      console.log("Hit ! Good.");
   }
 	function start(){
 		document.getElementById("main").addEventListener("click", touchEvent, false);
@@ -21,7 +31,7 @@ var ctx = canvas.getContext('2d');
 canvas.width = 480;
 canvas.height = 320;
 
-ctx.fillStyle = 'black';
+ctx.fillStyle = colors[counter%length];
 ctx.beginPath();
  ctx.arc(ballX, ballY, ballR, 0, Math.PI * 2 , true);
 ctx.fill();
